@@ -20,6 +20,6 @@ M = 0.058; %[kg]
 Diameter = 59.3*0.001; %[m]
 
 % Electrical
-R = 2.8304; % [Ohm]
+R = 3.9924; % [Ohm]
 u_max = 11.3; % [V]
 % f_PWM = [Hx];
