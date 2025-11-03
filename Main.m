@@ -287,3 +287,55 @@ C = [1 0 0]; % y = C*x => y = x
 D = 0;       % Macierz przenoszenia
 
 
+%% LQR: szybki wariant z Q=I, R=I + ładne wykresy
+
+% 1) Wagi
+Q = eye(3);
+R = 1;             % eye(1) == 1
+
+% 2) Sterowalność i wzmocnienie LQR
+Co = ctrb(A,B);
+if rank(Co) < size(A,1)
+    warning('Uwaga: (A,B) nie jest sterowalne w tym punkcie pracy.');
+end
+[K, S, e] = lqr(A, B, Q, R);   % S=P (macierz Riccatiego), e=bieguny CL
+
+% 3) Układy do odpowiedzi na odchyłkę i na wejście
+Acl = A - B*K;
+sys_x = ss(Acl, eye(3), eye(3), zeros(3));     % stany na wyjściu
+sys_y = ss(Acl, eye(3), C, zeros(1,3));        % wyjście y = Cx
+
+% 4) Warunek początkowy jako odchyłka od równowagi
+x_eq = s_stable(1); v_eq = s_stable(2); i_eq = s_stable(3);
+x0_dev = [x0; v0; i0] - [x_eq; v_eq; i_eq];
+
+% 5) Symulacja odpowiedzi na warunek początkowy (model liniowy)
+t = linspace(0, 1.5, 1501);     % horyzont i rozdzielczość
+[xyz, ~] = initial(sys_x, x0_dev, t);          % [x v i]
+[y_lin, ~] = initial(sys_y, x0_dev, t);        % wyjście
+
+% 6) Dodaj poziom równowagi (ładny podgląd w jednostkach rzeczywistych)
+x_lin = xyz(:,1) + x_eq;
+v_lin = xyz(:,2) + v_eq;
+i_lin = xyz(:,3) + i_eq;
+y_lin = y_lin     + C*[x_eq; v_eq; i_eq];
+
+% 7) Wykresy
+figure('Name','LQR (Q=I, R=I): odpowiedź na warunek początkowy');
+tiledlayout(4,1);
+
+nexttile; plot(t, x_lin, 'LineWidth', 1.3); grid on;
+ylabel('x [m]'); title('Pozycja');
+
+nexttile; plot(t, v_lin, 'LineWidth', 1.3); grid on;
+ylabel('v [m/s]'); title('Prędkość');
+
+nexttile; plot(t, i_lin, 'LineWidth', 1.3); grid on;
+ylabel('i [A]'); title('Prąd');
+
+nexttile; plot(t, y_lin, 'LineWidth', 1.3); grid on;
+ylabel('y'); xlabel('t [s]'); title('Wyjście (C x)');
+
+% 8) Info diagnostyczne
+disp('Wzmocnienie K ='); disp(K);
+disp('Bieguny(A-BK) ='); disp(e);
