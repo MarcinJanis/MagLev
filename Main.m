@@ -290,7 +290,12 @@ D = 0;       % Macierz przenoszenia
 %% LQR: szybki wariant z Q=I, R=I + ładne wykresy
 
 % 1) Wagi
-Q = eye(3);
+
+x_offset = 0.001; % [m] -> 1 mm
+v_offset = 0.001; % [m/s] -> 1 mm/s
+i_offset = 0.05; % [A] -> 50 mA
+
+Q = [1/(x_offset^2) 0 0; 0 1/(v_offset^2) 0; 0 0 1/(i_offset^2)]; %eye(3);
 R = 1;             % eye(1) == 1
 
 % 2) Sterowalność i wzmocnienie LQR
@@ -339,3 +344,4 @@ ylabel('y'); xlabel('t [s]'); title('Wyjście (C x)');
 % 8) Info diagnostyczne
 disp('Wzmocnienie K ='); disp(K);
 disp('Bieguny(A-BK) ='); disp(e);
+
