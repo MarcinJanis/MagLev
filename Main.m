@@ -290,20 +290,18 @@ D = 0;       % Macierz przenoszenia
 %% LQR: szybki wariant z Q=I, R=I + ładne wykresy
 
 % 1) Wagi
-
-x_offset = 0.001; % [m] -> 1 mm
-v_offset = 0.001; % [m/s] -> 1 mm/s
-i_offset = 0.05; % [A] -> 50 mA
-
-Q = [1/(x_offset^2) 0 0; 0 1/(v_offset^2) 0; 0 0 1/(i_offset^2)]; %eye(3);
-R = 1;             % eye(1) == 1
+Q = [1/(0.001^2) 0 0;
+    0 1/(0.01^2) 0;
+    0 0 1/(0.01^2)];
+%W = 0.4;             % eye(1) == 1
+W = 0.5
 
 % 2) Sterowalność i wzmocnienie LQR
 Co = ctrb(A,B);
 if rank(Co) < size(A,1)
     warning('Uwaga: (A,B) nie jest sterowalne w tym punkcie pracy.');
 end
-[K, S, e] = lqr(A, B, Q, R);   % S=P (macierz Riccatiego), e=bieguny CL
+[K, S, e] = lqr(A, B, Q, W);   % S=P (macierz Riccatiego), e=bieguny CL
 
 % 3) Układy do odpowiedzi na odchyłkę i na wejście
 Acl = A - B*K;
@@ -344,4 +342,3 @@ ylabel('y'); xlabel('t [s]'); title('Wyjście (C x)');
 % 8) Info diagnostyczne
 disp('Wzmocnienie K ='); disp(K);
 disp('Bieguny(A-BK) ='); disp(e);
-
