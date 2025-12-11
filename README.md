@@ -35,7 +35,9 @@ ___
 `Funkcja Lagrange'a`
 
 $$\mathcal{L} = E_{kin} - E_{pot}$$
+
 $E_{kin}=\frac{1}{2}m\dot{x}^2+\frac{1}{2}L(x)\dot{q}^2+qu$$
+
 $E_{pot}=mg(-x)$
 
 where:
@@ -44,9 +46,13 @@ $x_i=
 x \\
 q 
 \end{bmatrix}$ -(współrzędną uogólniona),
+
 $x$ - position,
+
 $q$ - electric charge,
+
 $i=\dot{q}$ - current,
+
 $L(x)$ - Inductance
 
 `Lagrange equation`
@@ -58,9 +64,12 @@ $$
 \frac{\partial \mathcal{R}}{\partial \dot{x_i}}
 = Q_{ext}
 $$
+
 where:
 $\mathcal{R}=\frac{1}{2}Ri^2$ - Enery that is lost on resistance
+
 $R$ - Resistance
+
 $Q_{ext}=\frac{\partial \dot{q}u}{\partial\dot{q}}=u$ - (uogólnione siły zewnętrzne)
 
 po podstawieniu do równania:
@@ -84,9 +93,12 @@ R\dot{q}
 u
 $$
 
+
 przekształcając do równań stanu otrzymujemt dwa równania opisujące dynamikę układu:
 $\dot{x}=v$
+
 $\dot{v} = \frac{1}{2m}\frac{\partial L(x)}{\partial{x}}i^2 - g$
+
 $\dot{i}=\frac{1}{L(x)}(u-iR-\frac{dL(x)}{d(x)}vi)$
 
 
@@ -95,20 +107,27 @@ $\dot{i}=\frac{1}{L(x)}(u-iR-\frac{dL(x)}{d(x)}vi)$
 tego się nie da do maierzy
 A to przekształcić można do równań stanu:
 $$ \mathbf{\dot{x}} = \mathbf{A} \mathbf{x} +  \mathbf{B}u$$
+
 $$ y = \mathbf{C} \mathbf{x} +  \mathbf{D}u$$
+
 gdzie:
+
 $$ \mathbf{x}=
 \begin{bmatrix}
 x  \\
 v \\
 i 
 \end{bmatrix}$$
+
 $$ \mathbf{A}=
 \begin{bmatrix}
 0 & 1 & 0  \\
 0 & 0 & \frac{1}{2m}\frac{\partial L(x)}{\partial{x}} \\
 i 
 \end{bmatrix}$$
+
 $$ \mathbf{C}$$
+
 $$ \mathbf{D}$$
+
 $$ \mathbf{E}$$
