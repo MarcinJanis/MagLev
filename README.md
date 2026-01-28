@@ -1,9 +1,16 @@
 ---
 title: "Laboratorium Problemowe – Lewitacja magnetyczna"
+
 subtitle: "Pomiary i porównanie regulatorów LQR/LQI"
+
 author: "Janis Marcin, Lorenc Patryk, Kusznir Tim, Golenia Jan"
+
 date: "15.12.2025"
 ---
+
+## Results of project - **magnetic levitation**. 
+[!Result1](./image/mglv_photo.png)
+[!Result1](./image/mglv_movie.png)
 
 ## Spis treści
 
