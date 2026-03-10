@@ -9,8 +9,9 @@ date: "15.12.2025"
 ---
 
 ## Results of project - **magnetic levitation**. 
-![Result1](./images/mglv_photo.jpg)
-![Result2](./images/mglv_movie.gif)
+<img src="./images/mglv_photo.jpg" alt="Result1" width="400" />
+<img src="./images/mglv_movie.gif" alt="Result2" width="400" />
+
 
 ## Spis treści
 
